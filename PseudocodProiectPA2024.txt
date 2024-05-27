@@ -1,0 +1,60 @@
+/// Pseudocod Proiect PA 2024
+/// Presupunem DIM = 105 -> lungime maxim 100 caractere la siruri
+/// Vom face algoritmul pentru cazul cel mai simplu ( nu generam input-ul, ci il citim de la tastatura)
+/// in loc de <- vom folosi "=" pentru a face totul mult mai simplu
+DECLARE regula AS STRING
+DECLARE	fragment_cod AS STRING
+DECLARE n AS INTEGER
+DECLARE m AS INTEGER
+DECLARE dp[105][105] AS INTEGER
+FUNCTION MinOfTwo(integer a, integer b)
+	IF a>b THEN:
+		RETURN a
+	else
+		RETURN b
+	END IF
+END FUNCTION 
+
+FUNCTION NrMinimOperatii( string regula , string fragment_cod, integer dp[105][105], integer n, integer m)
+	FOR i = 0 TO n+1 DO
+		dp[i][0]=i
+	END FOR
+	FOR j = 0 TO m+1 DO
+		dp[0][j]=j
+	END FOR
+	FOR i = 0 TO n DO
+	    FOR j=0 TO m DO
+			IF regula[i]=fragment_cod[j] THEN:
+				dp[i+1][j+1]=dp[i][j]
+			ELSE
+				integer insert_cost=dp[i+1]+1
+				integer delete_cost=dp[i][j+1]+1
+				integer replace_cost=dp[i][j]+1
+				IF regula[i-1]==fragment_cod[j] and regula[i]==fragment_cod[j-1] THEN:
+					swap_cost=dp[i-1][j-1]+1
+					replace_cost=MinOfTwo(replace_cost,swap_cost)
+				END IF
+				dp[i+1][j+1]=MinOfTwo(MinOfTwo(replace_cost,insert_cost),delete_cost)
+			END IF
+		END FOR
+	END FOR
+	RETURN dp[n][m]		
+END FUNCTION
+
+READ regula
+READ fragment_cod
+
+FOR i = 0 TO 100 DO
+	FOR j=0 TO 100 DO
+		dp[i][j]=0
+	END FOR
+END FOR
+
+	
+n = length(regula)
+m = length(fragment_cod)
+integer nr = NrMinimOperatii(regula,fragment_cod,dp,n,m)
+PRINT "Numarul minim de operatii pentru a ajunge la un cod valid de la fragmentul de cod introdus este egal cu: "
+PRINT nr
+	
+	
