@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1716821728 source:d:\informatica\proiecte c\proiectpa2024\proiectpa2024.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"inputgenerator.h"
+	<string.h>
+	<time.h>
+
+1716809083 d:\informatica\proiecte c\proiectpa2024\inputgenerator.c
+	<stdio.h>
+	<stdlib.h>
+	"inputgenerator.h"
+
+1716811090 d:\informatica\proiecte c\proiectpa2024\inputgenerator.h
+
+1716817972 source:d:\informatica\proiecte c\proiectpa2024\inputgenerator.c
+	<stdio.h>
+	<stdlib.h>
+	"inputgenerator.h"
+	<time.h>
+
